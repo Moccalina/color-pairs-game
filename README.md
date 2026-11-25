@@ -3,6 +3,7 @@
 **Color Pairs** ist ein modernes, browserbasiertes Farb-Memory-Spiel mit fünf ansteigenden Schwierigkeitsgraden und sieben wählbaren Farbpaletten – entwickelt als schlanke Single-Page-Webanwendung ohne externe Frameworks.
 
 👉 **[Jetzt direkt im Browser spielen (GitHub Pages)](https://github.io)**
+🕹️ **[Auf itch.io spielen & bewerten](https://itch.io)**
 
 ---
 
@@ -19,12 +20,13 @@
 ## 🛠️ Tech-Stack
 
 * **Frontend:** Reines HTML5, CSS3 (Grid & Flexbox) und Vanilla JavaScript (ES6+)
-* **Hosting:** GitHub Pages
+* **Hosting & Distribution:** GitHub Pages & itch.io (HTML5-Webspiel)
 * **Qualitätssicherung:** Vollautomatisierte End-to-End-Tests mit Playwright
 
 ---
 
 ## 🔗 Weiterführende Links
 
-* 🧪 **Automatisierte Playwright-Testsuite:** [Moccalina/qa-ui-automation-lab](https://github.com)
-* 📝 **QA-Case-Study & Hintergrundartikel:** [QA UI Automation Blog](https://blogspot.com)
+* 🕹️ **itch.io Release-Seite:** [moccagames.itch.io/color-pairs](https://moccagames.itch.io/color-pairs-5-level-game)
+* 🧪 **Automatisierte Playwright-Testsuite:** [Moccalina/qa-ui-automation-lab](https://github.com](https://github.com/Moccalina/qa-ui-automation-lab)
+* 📝 **QA-Case-Study & Hintergrundartikel:** [QA UI Automation Blog](https://qa-ui-automation.blogspot.com/p/color-pairs-5-level-game.html)
