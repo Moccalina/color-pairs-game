@@ -3,6 +3,7 @@
 **Color Pairs** ist ein modernes, browserbasiertes Farb-Memory-Spiel mit fünf ansteigenden Schwierigkeitsgraden und sieben wählbaren Farbpaletten – entwickelt als schlanke Single-Page-Webanwendung ohne externe Frameworks.
 
 👉 **[Jetzt direkt im Browser spielen (GitHub Pages)](https://moccalina.github.io/color-pairs-game/index.html)**
+
 🕹️ **[Auf itch.io spielen & bewerten](https://moccagames.itch.io/color-pairs-5-level-game)**
 
 ---
