@@ -678,16 +678,24 @@
             return [...new Set(alle)];
         }
 
-        const customMixPanel = document.getElementById('custom-mix-panel');
+               const customMixPanel = document.getElementById('custom-mix-panel');
         const themeRadios = document.querySelectorAll('input[name="color-theme"]');
         const customCheckboxes = document.querySelectorAll('#custom-mix-panel input[type="checkbox"]');
 
+        function aktualisiereCustomPanelSichtbarkeit() {
+            const ausgewaehlt = document.querySelector('input[name="color-theme"]:checked');
+            if (ausgewaehlt && ausgewaehlt.value === 'custom') {
+                customMixPanel.classList.remove('hidden');
+            } else {
+                customMixPanel.classList.add('hidden');
+            }
+        }
+
         themeRadios.forEach(radio => {
             radio.addEventListener('change', () => {
-                if (radio.value === 'custom' && radio.checked) {
-                    customMixPanel.classList.remove('hidden');
-                } else {
-                    customMixPanel.classList.add('hidden');
+                aktualisiereCustomPanelSichtbarkeit();
+                if (aktuellePaarAnzahl > 0 && !gameScreen.classList.contains('hidden')) {
+                    starteSpiel(aktuellePaarAnzahl, levelTitle.textContent);
                 }
             });
         });
@@ -696,10 +704,15 @@
             cb.addEventListener('change', () => {
                 const checkedCount = document.querySelectorAll('#custom-mix-panel input[type="checkbox"]:checked').length;
                 if (checkedCount === 0) {
-                    cb.checked = true; // Mindestens 1 Farbe bleibt aktiv
+                    cb.checked = true;
+                    return;
+                }
+                if (aktuellePaarAnzahl > 0 && !gameScreen.classList.contains('hidden')) {
+                    starteSpiel(aktuellePaarAnzahl, levelTitle.textContent);
                 }
             });
         });
+
 
         function generiereFarben(anzahl, thema) {
             let gewaehlteThemen = [];
