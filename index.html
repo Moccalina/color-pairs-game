@@ -473,7 +473,7 @@
             text-decoration: underline;
         }
 
-                .color-selector-box .radio-label:nth-child(5) { grid-column: auto; }
+        .color-selector-box .radio-label:nth-child(5) { grid-column: auto; }
         .color-selector-box .radio-label:nth-child(6) { grid-column: auto; }
         .color-selector-box .radio-label:nth-child(7) { grid-column: auto; }
 
@@ -678,15 +678,51 @@
             return [...new Set(alle)];
         }
 
+            const customMixPanel = document.getElementById('custom-mix-panel');
+        const themeRadios = document.querySelectorAll('input[name="color-theme"]');
+        const customCheckboxes = document.querySelectorAll('#custom-mix-panel input[type="checkbox"]');
+
+        themeRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'custom' && radio.checked) {
+                    customMixPanel.classList.remove('hidden');
+                } else {
+                    customMixPanel.classList.add('hidden');
+                }
+            });
+        });
+
+        customCheckboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                const checkedCount = document.querySelectorAll('#custom-mix-panel input[type="checkbox"]:checked').length;
+                if (checkedCount === 0) {
+                    cb.checked = true; // Mindestens 1 Farbe bleibt aktiv
+                }
+            });
+        });
+
         function generiereFarben(anzahl, thema) {
-            let pool = [];
+            let gewaehlteThemen = [];
+
             if (thema === 'all') {
-                pool = holeAlleFarben();
+                gewaehlteThemen = Object.keys(tailwindPalette);
+            } else if (thema === 'custom') {
+                gewaehlteThemen = Array.from(document.querySelectorAll('#custom-mix-panel input[type="checkbox"]:checked'))
+                    .map(cb => cb.value);
+                if (gewaehlteThemen.length === 0) {
+                    gewaehlteThemen = ['blue', 'purple'];
+                }
             } else {
-                pool = [...tailwindPalette[thema]];
+                gewaehlteThemen = [thema];
             }
 
-            pool = arrayMischen(pool);
+            let pool = [];
+            gewaehlteThemen.forEach(t => {
+                if (tailwindPalette[t]) {
+                    pool = pool.concat(tailwindPalette[t]);
+                }
+            });
+            pool = arrayMischen([...new Set(pool)]);
 
             if (anzahl <= pool.length) {
                 return pool.slice(0, anzahl);
@@ -695,21 +731,22 @@
             let farbAuswahl = [...pool];
             const restBedarf = anzahl - pool.length;
 
-            let startHue = 0;
-            let hueRange = 30;
-
-            if (thema === 'yellow-orange') { startHue = 30; hueRange = 25; }
-            if (thema === 'red')           { startHue = 0;  hueRange = 15; }
-            if (thema === 'purple')        { startHue = 260; hueRange = 40; }
-            if (thema === 'blue')          { startHue = 190; hueRange = 40; }
-            if (thema === 'green')         { startHue = 100; hueRange = 50; }
+            const hueConfig = {
+                'yellow-orange': { start: 30, range: 25 },
+                'red':           { start: 0,  range: 15 },
+                'purple':        { start: 260, range: 40 },
+                'blue':          { start: 190, range: 40 },
+                'green':         { start: 100, range: 50 }
+            };
 
             for (let i = 0; i < restBedarf; i++) {
-                if (thema === 'grey' || thema === 'all') {
+                const aktuellesSubThema = gewaehlteThemen[i % gewaehlteThemen.length];
+                if (aktuellesSubThema === 'grey' || thema === 'all') {
                     let helligkeit = 10 + ((i * 79) % 81);
                     farbAuswahl.push(`hsl(0, 0%, ${helligkeit}%)`);
                 } else {
-                    let feinerHue = (startHue + ((i * 7) % hueRange)) % 360;
+                    const cfg = hueConfig[aktuellesSubThema] || { start: 0, range: 360 };
+                    let feinerHue = (cfg.start + ((i * 7) % cfg.range)) % 360;
                     let feineSaettigung = 60 + ((i * 13) % 36);
                     let feineHelligkeit = 25 + ((i * 17) % 51);
                     farbAuswahl.push(`hsl(${feinerHue}, ${feineSaettigung}%, ${feineHelligkeit}%)`);
@@ -718,6 +755,7 @@
 
             return arrayMischen([...new Set(farbAuswahl)]);
         }
+
 
         let farbPool = [];
         let ausgewaehlteKarten = [];
