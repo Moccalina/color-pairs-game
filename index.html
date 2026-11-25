@@ -472,6 +472,54 @@
         .game-footer a:hover {
             text-decoration: underline;
         }
+
+                .color-selector-box .radio-label:nth-child(5) { grid-column: auto; }
+        .color-selector-box .radio-label:nth-child(6) { grid-column: auto; }
+        .color-selector-box .radio-label:nth-child(7) { grid-column: auto; }
+
+        .custom-mix-panel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px;
+            margin-top: -4px;
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .custom-mix-panel.hidden {
+            display: none !important;
+        }
+
+        .custom-chip {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1.5px solid #e2e8f0;
+            background: #f8fafc;
+            font-size: 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s ease;
+        }
+
+        .custom-chip:has(input:checked) {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            transform: scale(1.05);
+        }
+
+        .custom-chip input {
+            accent-color: #3b82f6;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
