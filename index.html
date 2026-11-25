@@ -568,7 +568,7 @@
                     <h2 class="panel-level-title" id="current-level-title">Level</h2>
                 </div>
 
-                                <div class="color-selector-box">
+                <div class="color-selector-box">
                     <label class="radio-label"><input checked name="color-theme" type="radio" value="all" /> 🌈</label>
                     <label class="radio-label"><input name="color-theme" type="radio" value="yellow-orange" /> 🟡</label>
                     <label class="radio-label"><input name="color-theme" type="radio" value="red" /> 🔴</label>
@@ -678,7 +678,7 @@
             return [...new Set(alle)];
         }
 
-            const customMixPanel = document.getElementById('custom-mix-panel');
+        const customMixPanel = document.getElementById('custom-mix-panel');
         const themeRadios = document.querySelectorAll('input[name="color-theme"]');
         const customCheckboxes = document.querySelectorAll('#custom-mix-panel input[type="checkbox"]');
 
@@ -797,7 +797,7 @@
 
         backBtn.addEventListener('click', zeigeStartmenue);
 
-                function starteSpiel(anzahlPaare, levelName) {
+            function starteSpiel(anzahlPaare, levelName) {
             clearTimeout(paarTimeout);
             clearTimeout(siegTimeout);
             paarTimeout = null;
@@ -1029,4 +1029,3 @@
     </script>
 </body>
 </html>
-
